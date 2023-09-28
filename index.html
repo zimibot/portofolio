@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio</title>
+    <title>Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
 </head>
@@ -28,9 +28,9 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="/#about-me">ABOUT MYSELF</a></li>
-                    <li><a href="/#experience">EXPERIENCE</a></li>
-                    <li><a href="/#education">EDUCATION</a></li>
+                    <li><a href="#about-me">ABOUT MYSELF</a></li>
+                    <li><a href="#experience">EXPERIENCE</a></li>
+                    <li><a href="#education">EDUCATION</a></li>
                 </ul>
             </nav>
         </div>
@@ -58,7 +58,8 @@
             <div class="card tentang">
                 <div class="title">ABOUT MYSELF</div>
                 <div class="text-desc grid">
-                    <p>Saya adalah seorang Frontend Kreatif di Indonesia yang sangat menyukai desain yang bersih, sederhana, dan unik. Saya juga senang membuat dan merancang
+                    <p>Saya adalah seorang Frontend Kreatif di Indonesia yang sangat menyukai desain yang bersih,
+                        sederhana, dan unik. Saya juga senang membuat dan merancang
                     </p>
                     <!-- <button class="button green-btn">
                         Download Resume
@@ -214,50 +215,40 @@
     <section class="slider full-container relative">
         <div class="container-slider">
             <div class="image-items relative">
-                <div class="w-full bg-image"
-                    style="height: 250px; background-image: url('./image/slider/1.png');">
+                <div class="w-full bg-image" style="height: 250px; background-image: url('./image/slider/1.png');">
+                </div>
+            </div>
+            <div class="image-items relative">
+                <div class="w-full bg-image" style="height: 250px; background-image: url('./image/slider/2.webp');">
 
                 </div>
             </div>
             <div class="image-items relative">
-                <div class="w-full bg-image"
-                    style="height: 250px; background-image: url('./image/slider/2.webp');">
+                <div class="w-full bg-image" style="height: 250px; background-image: url('./image/slider/3.jpg');">
 
                 </div>
             </div>
             <div class="image-items relative">
-                <div class="w-full bg-image"
-                    style="height: 250px; background-image: url('./image/slider/3.jpg');">
+                <div class="w-full bg-image" style="height: 250px; background-image: url('./image/slider/4.jpg');">
 
                 </div>
             </div>
             <div class="image-items relative">
-                <div class="w-full bg-image"
-                    style="height: 250px; background-image: url('./image/slider/4.jpg');">
+                <div class="w-full bg-image" style="height: 250px; background-image: url('./image/slider/5.jpg');">
+                </div>
+            </div>
+            <div class="image-items relative">
+                <div class="w-full bg-image" style="height: 250px; background-image: url('./image/slider/6.webp');">
 
                 </div>
             </div>
             <div class="image-items relative">
-                <div class="w-full bg-image"
-                    style="height: 250px; background-image: url('./image/slider/5.jpg');">
+                <div class="w-full bg-image" style="height: 250px; background-image: url('./image/slider/7.jpg');">
 
                 </div>
             </div>
             <div class="image-items relative">
-                <div class="w-full bg-image"
-                    style="height: 250px; background-image: url('./image/slider/6.webp');">
-
-                </div>
-            </div>
-            <div class="image-items relative">
-                <div class="w-full bg-image"
-                    style="height: 250px; background-image: url('./image/slider/7.jpg');">
-
-                </div>
-            </div>
-            <div class="image-items relative">
-                <div class="w-full bg-image"
-                    style="height: 250px; background-image: url('./image/slider/8.webp');">
+                <div class="w-full bg-image" style="height: 250px; background-image: url('./image/slider/8.webp');">
 
                 </div>
             </div>
@@ -281,6 +272,7 @@
         </div>
     </footer>
 
+    <div id="popup"></div>
     <script>
         function startLoader() {
             const loader = document.querySelector(".loader");
@@ -311,12 +303,35 @@
                 const itemWidth = containerWidth / totalItems;
                 const viewportWidth = window.innerWidth;
 
+                console.log(container.children)
+
                 let totalWitdhItems = 0
 
                 for (let i = 0; i < container.children.length; i++) {
-                    totalWitdhItems += container.children[i].clientWidth
+                    let items = container.children[i]
+                    let image = items.firstElementChild
+                    image.addEventListener("click", (d) => {
+                        let bg = d.target.attributes.style.value.split(";")[1]
+                        document.querySelector("#popup").innerHTML = `
+                            <div class="fixed w-full h-full top item-center justify-center flex" style="z-index:999;">
+                                <div id="close-popup" class="shadow">
+                                </div>
+                                <div class="card relative">
+                                    <div style="width: 700px; height: 450px; ${bg}; background-repeat: no-repeat; background-size: cover; background-position: center;"/>
+                                </div>
+                            </div>
+                        `
+                        const popupCLose = document.querySelector("#close-popup")
+
+                        popupCLose.addEventListener("click", (d) => {
+                            document.querySelector("#popup").innerHTML = ""
+                        })
+                    });
+                    totalWitdhItems += items.clientWidth
                 }
 
+
+             
 
                 function startSlideInterval() {
                     slideInterval = setInterval(autoSlide, 2000);
@@ -332,7 +347,6 @@
                     if (!isDragging) return;
                     const currentPos = e.clientX;
                     currentTranslate = currentPos - startPos;
-                    console.log(currentTranslate)
 
                     if (totalWitdhItems < viewportWidth) {
                         currentTranslate = 0;
