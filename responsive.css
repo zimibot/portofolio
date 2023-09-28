@@ -1,0 +1,40 @@
+@media only screen and (max-width: 900px) {
+    .foto-profile, .view-image  {
+      display: none;
+    }
+    .content-image .content-title {
+        font-size: 30px;
+    }
+
+    .content {
+        grid-template-columns: auto
+    }
+    .tentang {
+        padding: 40px 0;
+    }
+    .image-items {
+        flex: 0 0 50%; 
+        position: relative;
+        padding: 10px;
+    }
+  }
+@media only screen and (max-width: 600px) {
+    .foto-profile, .view-image  {
+      display: none;
+    }
+    .content-image .content-title {
+        font-size: 30px;
+    }
+
+    .content {
+        grid-template-columns: auto
+    }
+    .tentang {
+        padding: 40px 0;
+    }
+    .image-items {
+        flex: 0 0 100%; 
+        position: relative;
+        padding: 10px;
+    }
+  }
